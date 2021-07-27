@@ -60,7 +60,6 @@ def main():
     player_b = pygame.Rect(WIDTH/2 -5 , HEIGHT-50, 100, 10) #Second player
 
     ball = pygame.Rect(WIDTH/2 -5, HEIGHT/2 -5, 10, 10) #Ball
-
     while run:
         clock.tick(FPS)
 
