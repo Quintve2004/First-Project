@@ -1,23 +1,32 @@
 import pygame
 
+pygame.font.init()
+
 WIDTH, HEIGHT = 900, 900
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("First Project @Quintve")
+
+player_score_font = pygame.font.SysFont("Courier", 24)
 
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 VEL = 8
 BALLVEL = 5
 
+SCOREA = 0
+SCOREB = 0
+
 player_a_collide = pygame.USEREVENT + 1
 player_b_collide = pygame.USEREVENT + 2
 
-def window_update(player_a, player_b, ball):
+def window_update(player_a, player_b, ball, scoreA, scoreB):
     WIN.fill(WHITE)
-
     pygame.draw.rect(WIN, BLACK, player_a)
     pygame.draw.rect(WIN, BLACK, player_b)
     pygame.draw.rect(WIN, BLACK, ball)
+
+    score_text = player_score_font.render("Player a: {} Player b: {}".format(scoreA, scoreB), 1, BLACK )
+    WIN.blit(score_text, (WIDTH/2 - score_text.get_width()/2, HEIGHT - (HEIGHT -10)))
     pygame.display.update()
 
 def player_a_movement(keys_pressed, player_a):
@@ -76,7 +85,7 @@ def main():
         ball_movement(ball)
 
         collide_object(player_a, player_b, ball)
-        window_update(player_a, player_b, ball) #Updates UI
+        window_update(player_a, player_b, ball, SCOREA, SCOREA) #Updates UI
 
 # Initialize pygame
 if __name__ == "__main__":
